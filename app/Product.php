@@ -12,18 +12,18 @@ class Product extends Model
     ];
 
 
-    public function setCategoryIdAttribute($value)
-    {
-        if ($value == 0) {
-            $this->attributes['category_id'] = null;
-        } else {
+    // public function setCategoryIdAttribute($value)
+    // {
+    //     if ($value == 0) {
+    //         $this->attributes['category_id'] = null;
+    //     } else {
 
-            $this->attributes['category_id'] = $value;
-        }
-    }
+    //         $this->attributes['category_id'] = $value;
+    //     }
+    // }
     public function category()
     {
-        return $this->hasOne(Category::class);
+        return $this->belongsTo(Category::class);
     }
 
     public function Image()
