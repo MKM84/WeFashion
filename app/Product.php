@@ -8,9 +8,19 @@ class Product extends Model
 {
 
     protected $fillable = [
-        'name', 'description', 'price', 'size', 'visibility', 'sttatus', 'reference', 'category_id'
+        'name', 'description', 'price', 'size', 'visibility', 'status', 'reference', 'category_id'
     ];
 
+
+    public function setCategoryIdAttribute($value)
+    {
+        if ($value == 0) {
+            $this->attributes['category_id'] = null;
+        } else {
+
+            $this->attributes['category_id'] = $value;
+        }
+    }
     public function category()
     {
         return $this->hasOne(Category::class);
@@ -21,13 +31,13 @@ class Product extends Model
         return $this->hasOne(Image::class);
     }
 
-    public function scopePublished($query)
-    {
-        return $query->where('visibility', 'published');
-    }
+    // public function scopePublished($query)
+    // {
+    //     return $query->where('visibility', 'published');
+    // }
 
-    public function scopeSold($query)
-    {
-        return $query->where('status', 'sold');
-    }
+    // public function scopeSold($query)
+    // {
+    //     return $query->where('status', 'sold');
+    // }
 }
