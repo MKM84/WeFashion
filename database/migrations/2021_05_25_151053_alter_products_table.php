@@ -14,7 +14,7 @@ class AlterProductsTable extends Migration
     public function up()
     {
         Schema::table('products', function (Blueprint $table) {
-            $table->unsignedInteger('category_id')->default(1);  
+            $table->unsignedInteger('category_id')->nullable();  
             $table->foreign('category_id')->references('id')->on('categories'); // Reference on categories table
         });
     }
