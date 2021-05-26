@@ -12,13 +12,13 @@ class ProductTableSeeder extends Seeder
     public function run()
     {
 
-        Storage::disk('local')->delete(Storage::allFiles());
+        // Storage::disk('local')->delete(Storage::allFiles());
 
         App\Category::create([
-            'category' => 'homme'
+            'gender' => 'homme'
         ]);
         App\Category::create([
-            'category' => 'femme'
+            'gender' => 'femme'
         ]);
 
         // create 80 products from factory
@@ -31,12 +31,12 @@ class ProductTableSeeder extends Seeder
             $product->save(); // save the association in the DB 
 
             // Add images
-            $link = str_random(12) . '.jpg'; // hash the link 
-            $file = file_get_contents('https://picsum.photos/800/1200');
-            Storage::disk('local')->put($link, $file);
+            $files = Storage::allFiles($category->gender == "homme" ? "hommes" : "femmes");
+            $fileIndex = array_rand($files);
+            $file = $files[$fileIndex];
 
             $product->image()->create([
-                'link' => $link
+                'link' => $file
             ]);
 
         });
