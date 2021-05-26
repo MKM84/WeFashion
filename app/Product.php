@@ -31,13 +31,13 @@ class Product extends Model
         return $this->hasOne(Image::class);
     }
 
-    // public function scopePublished($query)
-    // {
-    //     return $query->where('visibility', 'published');
-    // }
+    public function scopePublished($query)
+    {
+        return $query->where('visibility', 'published');
+    }
 
-    // public function scopeSold($query)
-    // {
-    //     return $query->where('status', 'sold');
-    // }
+    public function scopeSold($query)
+    {
+        return $query->where('status', 'sold');
+    }
 }
