@@ -14,11 +14,14 @@
 
 <body>
     <div class="mw-100">
-        {{-- @include('partials.menu') --}}
+        @include('partials.menu')
     </div>
     <div class="container">
         <div class="col-md-12">
             @yield('content')
+        </div>
+                <div class="col-md-12">
+            @yield('pagination')
         </div>
     </div>
     @section('scripts')
