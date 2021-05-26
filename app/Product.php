@@ -26,7 +26,7 @@ class Product extends Model
         return $this->belongsTo(Category::class);
     }
 
-    public function Image()
+    public function image()
     {
         return $this->hasOne(Image::class);
     }

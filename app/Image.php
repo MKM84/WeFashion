@@ -6,7 +6,10 @@ use Illuminate\Database\Eloquent\Model;
 
 class Image extends Model
 {
-    public function products()
+    protected $fillable = [
+        'link'
+    ];
+    public function product()
     {
         return $this->belongsTo(Product::class);
     }
