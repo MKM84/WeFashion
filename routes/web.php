@@ -22,3 +22,4 @@ Route::get('/product/{id}', 'FrontController@show')->where(['id' => '[0-9]+']);
 Route::get('/soldes', 'FrontController@showProductBySoldes');
 
 Route::get('category/{id}', 'FrontController@showProductByCategory')->name('category');
+

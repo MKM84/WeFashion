@@ -54,4 +54,9 @@ class FrontController extends Controller
         $activeCategory = $categories->gender;
         return view('front.index', ['products' => $products, 'activeCategory' => $activeCategory]);
     }
+    public function show(int $id)
+    {
+        $product = Product::find($id);
+        return view('front.show', ['product' => $product]);
+    }
 }
