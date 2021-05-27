@@ -1,7 +1,9 @@
 @extends('layouts.master')
 
 @section('content')
-
+@if(isset($productsCount))
+<div>{{$productsCount}}</div>
+@endif
 @forelse($products as $product)
 <div class="card col-lg-4 col-md-6">
     @if ($product->image)

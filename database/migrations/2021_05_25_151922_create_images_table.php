@@ -17,7 +17,7 @@ class CreateImagesTable extends Migration
             $table->increments('id');
             $table->string('link', 100);
             $table->unsignedInteger('product_id'); 
-            $table->foreign('product_id')->references('id')->on('products')->onDelete('cascade'); // Reference key on products table
+            $table->foreign('product_id')->references('id')->on('products')->onDelete('cascade'); // Reference key to the product on products table
             $table->timestamps();
         });
     }

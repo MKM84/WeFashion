@@ -9,17 +9,28 @@
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
       </button>
-      <span class="navbar-brand" >WeFashion</span>
+      <span class="navbar-brand" ><a href="{{ url('/') }}">WeFashion</a></span>
 
     </div>
 
     <!-- Collect the nav links, forms, and other content for toggling -->
     <div class="collapse navbar-collapse">
       <ul class="nav navbar-nav">
-        <li class=""><a href="{{ url('/') }}">Accueil</a></li>
-        <li class=""><a href="{{ url('/sold') }}">Solde</a></li>
-        <li class=""><a href="{{ url('/hommes') }}">Hommes</a></li>
-        <li class=""><a href="{{ url('/femmes') }}">Femmes</a></li>
+
+        <li class="nav-item @if(isset($activeSoldes)) active @endif"><a href="{{ url('/soldes') }}">SOLDES</a></li>
+        {{-- <li class=""><a href="{{ url('/homme') }}">Homme</a></li>
+        <li class=""><a href="{{ url('/femme') }}">Femme</a></li> --}}
+
+        @if(isset($categories))
+                @forelse($categories as $id => $gender)
+
+                <li class="nav-item @if(isset($activeCategory) && $activeCategory == $gender['gender']) active @endif">
+                <a class="nav-link text-uppercase" href="{{route('category', $categories[$id]->id)}}">{{$gender["gender"]}}</a>
+
+                @empty 
+                <li>Aucune catégorie pour l'instant</li>
+                @endforelse
+                @endif
       </ul>
     </div><!-- /.navbar-collapse -->
 

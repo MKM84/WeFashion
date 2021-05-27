@@ -36,8 +36,9 @@ class Product extends Model
         return $query->where('visibility', 'published');
     }
 
-    public function scopeSold($query)
+    public function scopeSoldes($query)
     {
         return $query->where('status', 'sold');
     }
+
 }
