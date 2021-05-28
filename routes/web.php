@@ -23,3 +23,10 @@ Route::get('/soldes', 'FrontController@showProductBySoldes');
 
 Route::get('category/{id}', 'FrontController@showProductByCategory')->name('category');
 
+
+Auth::routes();
+
+Route::resource('/home', 'ProductController')->middleware('auth');
+Route::resource('/admin/product', 'ProductController')->middleware('auth');
+
+

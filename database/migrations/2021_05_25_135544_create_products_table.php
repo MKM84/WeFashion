@@ -21,7 +21,7 @@ class CreateProductsTable extends Migration
             $table->enum('size', ['XS', 'S', 'M', 'L', 'XL'])->default('M');
             $table->enum('visibility', ['published', 'unpublished'])->default('unpublished');
             $table->enum('status', ['sold', 'standard'])->default('standard');
-            $table->string('reference', 16)->unique(); // uniqe reference
+            $table->string('reference', 16);
             $table->timestamps();
         });
     }
