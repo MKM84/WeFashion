@@ -82,7 +82,7 @@
         <input type="radio" @if (old('visibility')=='unpublished' ) checked @endif name="visibility"
             value="unpublished"> Non Publié<br>
     </div>
-    <div class="input-radio">
+    {{-- <div class="input-radio">
         <h2>Taille</h2>
         <input type="radio" @if (old('size')=='XL' ) checked @endif name="size" value="XL" checked> XL<br>
         <input type="radio" @if (old('size')=='L' ) checked @endif name="size" value="L" checked> L<br>
@@ -90,7 +90,7 @@
         <input type="radio" @if (old('size')=='S' ) checked @endif name="size" value="S" checked> S<br>
         <input type="radio" @if (old('size')=='XS' ) checked @endif name="size" value="XS" checked> XS<br>
 
-    </div>
+    </div> --}}
     <h2>Image</h2>
 
     <input class="file" type="file" name="image">

@@ -82,7 +82,7 @@
         <input type="radio" @if ($product->visibility == 'unpublished') checked @endif name="visibility"
         value="unpublished"> Non Publié<br>
     </div>
-    <div class="input-radio">
+    {{-- <div class="input-radio">
         <h2>Taille</h2>
         <input type="radio" @if ($product->size =='XL' ) checked @endif name="size" value="XL"
         > XL<br>
@@ -95,7 +95,7 @@
         <input type="radio" @if ($product->size =='XS' ) checked @endif name="size" value="XS"
         > XS<br>
 
-    </div>
+    </div> --}}
     <h2>Image</h2>
 
     <input class="file" type="file" name="image"><span>{{$product->image->link}}</span>

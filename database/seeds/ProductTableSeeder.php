@@ -21,6 +21,24 @@ class ProductTableSeeder extends Seeder
             'gender' => 'femme'
         ]);
 
+        // App\Size::create([
+        //     'name' => 'XL'
+        // ]);
+        // App\Size::create([
+        //     'name' => 'L'
+        // ]);
+        // App\Size::create([
+        //     'name' => 'M'
+        // ]);
+        // App\Size::create([
+        //     'name' => 'S'
+        // ]);
+        // App\Size::create([
+        //     'name' => 'XS'
+        // ]);
+
+
+
         // create 80 products from factory
         factory(App\Product::class, 30)->create()->each(function ($product) {
 
@@ -38,6 +56,10 @@ class ProductTableSeeder extends Seeder
             $product->image()->create([
                 'link' => $file
             ]);
+
+
+            $sizes = App\Size::pluck('id')->shuffle()->slice(0, rand(1, 5))->all();
+            $product->sizes()->attach($sizes); 
 
         });
     }

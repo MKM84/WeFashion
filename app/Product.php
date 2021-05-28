@@ -30,6 +30,10 @@ class Product extends Model
     {
         return $this->hasOne(Image::class);
     }
+    public function sizes()
+    {
+        return $this->belongsToMany(Size::class);
+    }
 
     public function scopePublished($query)
     {
