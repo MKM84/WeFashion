@@ -9,7 +9,6 @@ use App\Category;
 class FrontController extends Controller
 
 {
-
     public function __construct()
     {
         view()->composer('partials.menu', function ($view) {
@@ -33,20 +32,6 @@ class FrontController extends Controller
         return view('front.soldes', ['products' => $products, 'activeSoldes' => $activeSoldes]);
     }
 
-    // public function showProductByHommes()
-    // {
-    //     $products = Product::Homme()->with('image', 'category')->paginate(6);
-
-    //     return view('front.index', ['products' => $products]);
-
-    // }
-    // public function showProductByFemmes()
-    // {
-    //     $products = Product::Femme()->with('image', 'category')->paginate(6);
-
-    //     return view('front.index', ['products' => $products]);
-    // }
-
     public function showProductByCategory($id)
     {
         $products = Product::where('category_id', $id)->paginate(6);
@@ -54,6 +39,7 @@ class FrontController extends Controller
         $activeCategory = $categories->gender;
         return view('front.index', ['products' => $products, 'activeCategory' => $activeCategory]);
     }
+
     public function show(int $id)
     {
         $product = Product::find($id);

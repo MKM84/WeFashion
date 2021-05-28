@@ -25,7 +25,7 @@
 @endsection
 @section('pagination')
 
-    {{ $products->links() }}
+{{ $products->links() }}
 
 
 @endsection

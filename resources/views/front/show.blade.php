@@ -16,16 +16,11 @@
         <p class="card-text">{{ $product->category->gender }}</p>
         <div class="input-radio">
             <h2>Taille</h2>
-            <input type="radio"  name="size" value="XL"
-                > XL<br>
-                <input type="radio" name="size" value="L"
-                > L<br>
-                <input type="radio" name="size" value="M"
-                checked> M<br>
-                <input type="radio"name="size" value="S"
-                > S<br>
-                <input type="radio" name="size" value="XS"
-                > XS<br>
+            <input type="radio" name="size" value="XL"> XL<br>
+            <input type="radio" name="size" value="L"> L<br>
+            <input type="radio" name="size" value="M" checked> M<br>
+            <input type="radio" name="size" value="S"> S<br>
+            <input type="radio" name="size" value="XS"> XS<br>
 
         </div>
         <a href="#" class="btn btn-primary">Acheter</a>

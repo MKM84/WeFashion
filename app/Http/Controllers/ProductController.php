@@ -28,9 +28,9 @@ class ProductController extends Controller
      */
     public function create()
     {
-               $categories = Category::pluck('gender', 'id')->all();
-               $images = Image::pluck('link', 'id')->all();
-               return view('back.product.create', ['categories' => $categories, 'images' => $images]);
+        $categories = Category::pluck('gender', 'id')->all();
+        $images = Image::pluck('link', 'id')->all();
+        return view('back.product.create', ['categories' => $categories, 'images' => $images]);
     }
 
     /**
@@ -54,26 +54,19 @@ class ProductController extends Controller
             'image' => 'required|image|max:3000'
         ]);
 
-        $product = Product::create($request->all()); 
-
-        // On utilise le modèle Book et la relation authors ManyToMany pour attacher des/un nouveaux/nouvel auteur(s)
-        // à un livre que l'on vient de créer en base de données.
-        // Attention $request->authors correspond aux données du formulaire alors $book->authors() à la relation ManyToMany
-        // $product->authors()->attach($request->authors);
+        $product = Product::create($request->all());
 
         // image
         $im = $request->file('image');
-        // si on associe une image à un book 
+    
         if (!empty($im)) {
             $category = $request->category_id == 1 ? "hommes" : "femmes";
 
-            $link = $request->file('image')->store('/'. $category);
+            $link = $request->file('image')->store('/' . $category);
 
-            // mettre à jour la table picture pour le lien vers l'image dans la base de données
             $product->image()->create([
                 'link' => $link,
             ]);
-
         }
         return redirect()->route('product.index')->with('message', 'success');
     }
@@ -101,7 +94,7 @@ class ProductController extends Controller
         $product = Product::find($id);
         $categorie = Category::pluck('gender', 'id')->all();
         $image = Image::pluck('link', 'id')->all();
-        $categories =Category::all();
+        $categories = Category::all();
         return view('back.product.edit', compact('product', 'categorie', 'image', 'categories'));
     }
 
@@ -123,7 +116,7 @@ class ProductController extends Controller
             'status' => 'in:standard,sold',
             'reference' => 'required|alpha_num',
             'category_id' => 'integer',
-            
+
             // 'authors.*' => 'integer', // pour vérifier un tableau d'entiers il faut mettre authors.*
             'image' => 'image|max:3000'
         ]);
@@ -131,22 +124,19 @@ class ProductController extends Controller
         $product = Product::find($id);
         $product->update($request->all());
 
-                // image
-                $im = $request->file('image');
-                // si on associe une image à un book 
-                if (!empty($im)) {
-                    $category = $request->category_id == 1 ? "hommes" : "femmes";
-        
-                    $link = $request->file('image')->store('/'. $category);
-        
-                    // mettre à jour la table picture pour le lien vers l'image dans la base de données
-                    $product->image()->update([
-                        'link' => $link,
-                    ]);
-        
-                }
-                return redirect()->route('product.index')->with('message', 'success');
+        // image
+        $im = $request->file('image');
 
+        if (!empty($im)) {
+            $category = $request->category_id == 1 ? "hommes" : "femmes";
+
+            $link = $request->file('image')->store('/' . $category);
+
+            $product->image()->update([
+                'link' => $link,
+            ]);
+        }
+        return redirect()->route('product.index')->with('message', 'success');
     }
 
     /**
@@ -158,11 +148,7 @@ class ProductController extends Controller
     public function destroy($id)
     {
         $product = Product::find($id);
-        // suppression de l'image si elle existe 
-        // if ($product->image) {
-        //     Storage::disk('local')->delete($product->image->link); // supprimer physiquement l'image
-        //     $product->image()->delete(); // supprimer l'information en base de données
-        // }
+
         $product->delete();
         return redirect()->route('product.index')->with('message', 'success delete');
     }
