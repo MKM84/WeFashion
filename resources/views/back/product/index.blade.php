@@ -1,72 +1,87 @@
 @extends('layouts.master')
 
+@section('menu')
+@include('back.partials.menu')
+@endsection
 @section('content')
-<p><a href="{{route('product.create')}}"><button type="button" class="btn btn-primary btn-lg">Ajouter un
-            produit</button></a></p>
-{{$products->links()}}
 {{-- On inclut le fichier des messages retournés par les actions du contrôleurs BookController--}}
-{{-- @include('back.book.partials.flash') --}}
-<table class="table table-striped">
-    <thead>
-        <tr>
-            <th>Nom</th>
-            <th>Prix</th>
-            <th>Tailles</th>
-            <th>Categorie</th>
-            <th>État</th>
-            <th>Réferece</th>
-            <th>Visibilité</th>
-            <th>Edition</th>
-            <th>Show</th>
-            <th>Delete</th>
-        </tr>
-    </thead>
-    <tbody>
-        @forelse($products as $product)
-        <tr>
-            <td>{{$product->name}}</td>
-            <td>{{$product->price}}</td>
-            <td>{{$product->size}}</td>
+@include('back.partials.flash')
+<div class=" margin-btm-20 text-right">
+    <a href="{{route('product.create')}}"><button type="button" class="btn btn-primary btn-md">Nouveau</button></a>
+</div>
 
-            <td>{{(!is_null($product->category_id) ) ?  $product->category->gender  : 'Aucune catégorie'}} </td>
-            <td>
-                @if($product->status == 'sold')
-                <button type="button" class="btn btn-success">en soldes</button>
-                @else
-                <button type="button" class="btn btn-warning">standard</button>
-                @endif
-            </td>
-            <td>{{$product->reference}}</td>
 
-            <td>
-                @if($product->visibility == 'published')
-                <button type="button" class="btn btn-success">publié</button>
-                @else
-                <button type="button" class="btn btn-warning">non-publié</button>
-                @endif
-            </td>
-            <td>
-                <a href="{{route('product.edit', $product->id)}}">Edit</a></td>
-            <td>
-                <a href="{{route('product.show', $product->id)}}"><img
-                        src="{{ asset('images/' .$product->image->link) }}" alt="" width="60"></a>
-            </td>
-            <td>
-                <form class="delete" method="POST" action="{{route('product.destroy', $product->id)}}">
-                    {{ method_field('DELETE') }}
-                    {{ csrf_field() }}
-                    <input class="btn btn-danger" type="submit" value="delete">
-                </form>
-            </td>
-        </tr>
-        @empty
-        aucun titre ...
-        @endforelse
-    </tbody>
-</table>
-{{$products->links()}}
-@endsection
-@section('scripts')
-@parent
-<script src="{{ asset('js/confirm.js') }}"></script>
-@endsection
+
+<div>
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>Nom</th>
+                <th>Catégorie</th>
+                <th>Prix(€)</th>
+                <th>État</th>
+                <th>Visibilité</th>
+
+                <th>Éditer</th>
+                <th>Supprimer</th>
+            </tr>
+        </thead>
+        <tbody>
+            @forelse($products as $product)
+            <tr>
+                <td>{{$product->name}}</td>
+
+                <td>
+                    @if(is_null($product->category_id)) aucune catégorie
+                    @else
+                    {{$product->category->gender}}
+                    @endif
+
+                </td>
+                <td>{{$product->price}} </td>
+
+                <td>
+                    @if($product->status == 'solde')
+                    <button type="button" class="btn btn-success btn-xs">en soldes</button>
+                    @else
+                    <button type="button" class="btn  btn-xs">standard</button>
+                    @endif
+                </td>
+                <td>
+                    @if($product->visibility == 'published')
+                    <button type="button" class="btn btn-info btn-xs">publié</button>
+                    @else
+                    <button type="button" class="btn btn-primary btn-xs">non-publié</button>
+                    @endif
+                </td>
+
+                <td>
+                    <a href=" {{route('product.edit', $product->id)}}">
+                        <span class="glyphicon glyphicon-edit" aria-hidden="true"></span>
+                    </a></td>
+
+                <td>
+                    <form class="delete" method="POST" action="{{route('product.destroy', $product->id)}}">
+                        {{ method_field('DELETE') }}
+                        {{ csrf_field() }}
+
+                        <input class="btn btn-danger btn-sm" type="submit" value="Supprimer">
+                    </form>
+                </td>
+            </tr>
+            @empty
+            <div class="container-fluid">
+                <h3> Aucun produit...</h3>
+                @endforelse
+        </tbody>
+    </table>
+    @section('pagination')
+    {{ $products->links() }}
+    @endsection
+
+    @endsection
+
+    @section('scripts')
+    @parent
+    <script src="{{ asset('js/confirm.js') }}"></script>
+    @endsection

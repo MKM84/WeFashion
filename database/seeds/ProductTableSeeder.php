@@ -21,26 +21,11 @@ class ProductTableSeeder extends Seeder
             'gender' => 'femme'
         ]);
 
-        // App\Size::create([
-        //     'name' => 'XL'
-        // ]);
-        // App\Size::create([
-        //     'name' => 'L'
-        // ]);
-        // App\Size::create([
-        //     'name' => 'M'
-        // ]);
-        // App\Size::create([
-        //     'name' => 'S'
-        // ]);
-        // App\Size::create([
-        //     'name' => 'XS'
-        // ]);
 
 
 
         // create 80 products from factory
-        factory(App\Product::class, 30)->create()->each(function ($product) {
+        factory(App\Product::class, 80)->create()->each(function ($product) {
 
             // Associate a category to a product
             $category = App\Category::find(rand(1, 2));
@@ -49,7 +34,7 @@ class ProductTableSeeder extends Seeder
             $product->save(); // save the association in the DB 
 
             // Add images
-            $files = Storage::allFiles($category->gender == "homme" ? "hommes" : "femmes");
+            $files = Storage::allFiles($category->gender == "homme" ? "homme" : "femme");
             $fileIndex = array_rand($files);
             $file = $files[$fileIndex];
 
@@ -59,8 +44,7 @@ class ProductTableSeeder extends Seeder
 
 
             $sizes = App\Size::pluck('id')->shuffle()->slice(0, rand(1, 5))->all();
-            $product->sizes()->attach($sizes); 
-
+            $product->sizes()->attach($sizes);
         });
     }
 }

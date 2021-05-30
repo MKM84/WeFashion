@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Product;
 use App\Category;
 use App\Image;
+use App\Size;
 
 
 class ProductController extends Controller
@@ -17,7 +18,7 @@ class ProductController extends Controller
      */
     public function index()
     {
-        $products = Product::paginate(8);
+        $products = Product::paginate(15);
         return view('back.product.index', ['products' => $products]);
     }
 
@@ -30,7 +31,9 @@ class ProductController extends Controller
     {
         $categories = Category::pluck('gender', 'id')->all();
         $images = Image::pluck('link', 'id')->all();
-        return view('back.product.create', ['categories' => $categories, 'images' => $images]);
+        $sizes = Size::pluck('name', 'id')->all();
+
+        return view('back.product.create', ['categories' => $categories, 'images' => $images, 'sizes' => $sizes]);
     }
 
     /**
@@ -47,28 +50,33 @@ class ProductController extends Controller
             'price' => 'required|regex:/^\d+(\.\d{1,2})?$/',
             'size' => 'in:XL,L,M,S,XS',
             'visibility' => 'in:published,unpublished',
-            'status' => 'in:standard,sold',
+            'status' => 'in:standard,solde',
             'reference' => 'required|alpha_num',
             'category_id' => 'integer',
-            // 'authors.*' => 'integer', // pour vérifier un tableau d'entiers il faut mettre authors.*
+            'sizes.*' => 'integer',
             'image' => 'required|image|max:3000'
         ]);
 
         $product = Product::create($request->all());
+        $product->sizes()->attach($request->sizes);
+
+
 
         // image
         $im = $request->file('image');
-    
-        if (!empty($im)) {
-            $category = $request->category_id == 1 ? "hommes" : "femmes";
 
-            $link = $request->file('image')->store('/' . $category);
+        if (!empty($im)) {
+            $category_id = $request->category_id;
+
+            $category = Category::find($category_id);
+            $category_gender = $category->gender;
+            $link = $request->file('image')->store('/' . $category_gender);
 
             $product->image()->create([
                 'link' => $link,
             ]);
         }
-        return redirect()->route('product.index')->with('message', 'success');
+        return redirect()->route('product.index')->with('message', 'Le produit a bien été ajouté !');
     }
 
     /**
@@ -79,8 +87,8 @@ class ProductController extends Controller
      */
     public function show($id)
     {
-        $product = Product::find($id);
-        return view('back.product.show', ['product' => $product]);
+        // $product = Product::find($id);
+        // return view('back.product.show', ['product' => $product]);
     }
 
     /**
@@ -93,9 +101,10 @@ class ProductController extends Controller
     {
         $product = Product::find($id);
         $categorie = Category::pluck('gender', 'id')->all();
+        $sizes = Size::pluck('name', 'id')->all();
         $image = Image::pluck('link', 'id')->all();
         $categories = Category::all();
-        return view('back.product.edit', compact('product', 'categorie', 'image', 'categories'));
+        return view('back.product.edit', compact('product', 'categorie', 'image', 'categories', 'sizes'));
     }
 
     /**
@@ -113,30 +122,35 @@ class ProductController extends Controller
             'price' => 'required|regex:/^\d+(\.\d{1,2})?$/',
             'size' => 'in:XL,L,M,S,XS',
             'visibility' => 'in:published,unpublished',
-            'status' => 'in:standard,sold',
+            'status' => 'in:standard,solde',
             'reference' => 'required|alpha_num',
             'category_id' => 'integer',
-
-            // 'authors.*' => 'integer', // pour vérifier un tableau d'entiers il faut mettre authors.*
+            'sizes.*' => 'integer',
             'image' => 'image|max:3000'
         ]);
 
         $product = Product::find($id);
         $product->update($request->all());
 
+        $product->sizes()->sync($request->sizes);
+
         // image
         $im = $request->file('image');
 
         if (!empty($im)) {
-            $category = $request->category_id == 1 ? "hommes" : "femmes";
 
-            $link = $request->file('image')->store('/' . $category);
+
+            $category_id = $request->category_id;
+            $category = Category::find($category_id);
+            $category_gender = $category->gender;
+
+            $link = $request->file('image')->store('/' . $category_gender);
 
             $product->image()->update([
                 'link' => $link,
             ]);
         }
-        return redirect()->route('product.index')->with('message', 'success');
+        return redirect()->route('product.index')->with('message', 'Le produit a bien été édité !');
     }
 
     /**
@@ -150,6 +164,6 @@ class ProductController extends Controller
         $product = Product::find($id);
 
         $product->delete();
-        return redirect()->route('product.index')->with('message', 'success delete');
+        return redirect()->route('product.index')->with('message', 'Le produit a bien été supprimé !');
     }
 }

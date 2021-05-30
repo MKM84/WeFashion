@@ -1,18 +1,24 @@
 @extends('layouts.master')
-
+@section('menu')
+@include('back.partials.menu')
+@endsection
 @section('content')
-<p><a href="{{route('category.create')}}"><button type="button" class="btn btn-primary btn-lg">Ajouter un
-            produit</button></a></p>
+@include('back.partials.flash')
+<p><a href="{{route('category.create')}}">
+        <div class=" margin-btm-20 text-right">
+            <button type="button" class="btn btn-primary btn-md">Ajouter une catégorie</button>
+    </a></p>
+</div>
 
 {{-- On inclut le fichier des messages retournés par les actions du contrôleurs BookController--}}
 {{-- @include('back.book.partials.flash') --}}
 <table class="table table-striped">
     <thead>
         <tr>
-            <th>Gender</th>
+            <th>Genre</th>
             <th>Id</th>
-            <th>Edition</th>
-            <th>Delete</th>
+            <th>Éditer</th>
+            <th>Supprimer</th>
         </tr>
     </thead>
     <tbody>
@@ -21,13 +27,14 @@
             <td>{{$category->gender}}</td>
             <td>{{$category->id}}</td>
             <td>
-                <a href="{{route('category.edit', $category->id)}}">Edit</a></td>
+                <a href="{{route('category.edit', $category->id)}}"> <span class="glyphicon glyphicon-edit"
+                        aria-hidden="true"></span></a></td>
 
             <td>
                 <form class="delete" method="POST" action="{{route('category.destroy', $category->id)}}">
                     {{ method_field('DELETE') }}
                     {{ csrf_field() }}
-                    <input class="btn btn-danger" type="submit" value="delete">
+                    <input class="btn btn-danger" type="submit" value="Supprimer">
                 </form>
             </td>
         </tr>

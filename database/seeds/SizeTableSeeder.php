@@ -13,20 +13,20 @@ class SizeTableSeeder extends Seeder
     {
         DB::table('sizes')->insert([
             [
-            'name' => 'XL',
+                'name' => 'XL',
             ],
             [
                 'name' => 'L',
             ],
-                [
-                    'name' => 'M',
-                ],
-                    [
-                        'name' => 'XL',
-                    ],
-                        [
-                            'name' => 'XS',
-                        ],
-            ]);
+            [
+                'name' => 'M',
+            ],
+            [
+                'name' => 'XL',
+            ],
+            [
+                'name' => 'XS',
+            ],
+        ]);
     }
 }

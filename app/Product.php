@@ -12,15 +12,15 @@ class Product extends Model
     ];
 
 
-    // public function setCategoryIdAttribute($value)
-    // {
-    //     if ($value == 0) {
-    //         $this->attributes['category_id'] = null;
-    //     } else {
+    public function setCategoryIdAttribute($value)
+    {
+        if ($value == 0) {
+            $this->attributes['category_id'] = null;
+        } else {
 
-    //         $this->attributes['category_id'] = $value;
-    //     }
-    // }
+            $this->attributes['category_id'] = $value;
+        }
+    }
     public function category()
     {
         return $this->belongsTo(Category::class);
@@ -42,7 +42,6 @@ class Product extends Model
 
     public function scopeSoldes($query)
     {
-        return $query->where('status', 'sold');
+        return $query->where('status', 'solde');
     }
-
 }

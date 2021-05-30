@@ -9,6 +9,9 @@ Route::get('category/{id}', 'FrontController@showProductByCategory')->name('cate
 
 Auth::routes();
 
+
 Route::resource('/admin/product', 'ProductController')->middleware('auth');
 
 Route::resource('/admin/category', 'CategoryController')->middleware('auth');
+
+Route::redirect('/admin', '/login');

@@ -5,13 +5,14 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Product;
 use App\Category;
+use App\Size;
 
 class FrontController extends Controller
 
 {
     public function __construct()
     {
-        view()->composer('partials.menu', function ($view) {
+        view()->composer('front.partials.menu', function ($view) {
             $categories = Category::all();
             $view->with('categories', $categories);
         });
@@ -19,22 +20,21 @@ class FrontController extends Controller
 
     public function index()
     {
-        $products = Product::orderBy('created_at')->with('image', 'category')->paginate(6);
-        $allProducts = Product::all();
-        $productsCount = count($allProducts);
-        return view('front.index', ['products' => $products, 'productsCount' => $productsCount]);
+        $products = Product::published()->orderBy('created_at', 'desc')->with('image', 'category', 'sizes')->paginate(6);
+
+        return view('front.index', ['products' => $products]);
     }
 
     public function showProductBySoldes()
     {
-        $products = Product::Soldes()->with('image', 'category')->paginate(6);
+        $products = Product::published()->Soldes()->orderBy('created_at', 'desc')->with('image', 'category')->paginate(6);
         $activeSoldes = true;
-        return view('front.soldes', ['products' => $products, 'activeSoldes' => $activeSoldes]);
+        return view('front.index', ['products' => $products, 'activeSoldes' => $activeSoldes]);
     }
 
     public function showProductByCategory($id)
     {
-        $products = Product::where('category_id', $id)->paginate(6);
+        $products = Product::published()->orderBy('created_at', 'desc')->where('category_id', $id)->paginate(6);
         $categories = Category::all()->where("id", $id)->first();
         $activeCategory = $categories->gender;
         return view('front.index', ['products' => $products, 'activeCategory' => $activeCategory]);
@@ -42,7 +42,7 @@ class FrontController extends Controller
 
     public function show(int $id)
     {
-        $product = Product::find($id);
+        $product = Product::published()->find($id);
         return view('front.show', ['product' => $product]);
     }
 }

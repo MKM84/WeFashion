@@ -16,11 +16,10 @@ class CreateProductsTable extends Migration
         Schema::create('products', function (Blueprint $table) {
             $table->increments('id');
             $table->string('name', 100);
-            $table->text('description')->nullable(); // optional
+            $table->text('description');
             $table->decimal('price', 9, 2);
-            // $table->enum('size', ['XS', 'S', 'M', 'L', 'XL'])->default('M');
             $table->enum('visibility', ['published', 'unpublished'])->default('unpublished');
-            $table->enum('status', ['sold', 'standard'])->default('standard');
+            $table->enum('status', ['solde', 'standard']);
             $table->string('reference', 16);
             $table->timestamps();
         });

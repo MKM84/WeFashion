@@ -1,9 +1,77 @@
+.body-container {
+    min-height: 50vh;
+}
+// product
+.cover-img {
+    min-width: 300px;
+    height: 600px;
+}
 img.card-img-top {
-    width: 334px;
+    width: 100%;
+    height: 100%;
     object-fit: cover;
-    height:600px;
 }
 .card {
-    margin-bottom: 100px;
-    height:760px;    
+    margin-bottom: 50px;
+}
+.product-card-ctn:hover {
+    img.card-img-top {
+        box-shadow: 0 4px 9px 0 #ccc;
+    }
+}
+
+// navbar
+.logo-wef,
+.logo-wef a {
+    color: #66eb9a !important;
+}
+.navbar {
+    border-radius: 0px;
+}
+.nav-item,
+.nav-link {
+    color: #fff !important;
+}
+.nav-item a,
+.nav-link a {
+    color: #fff !important;
+}
+.navbar-default {
+    border-color: #000;
+}
+li.nav-item.active a {
+    background-color: #211f1f !important;
+}
+
+// btn
+.margin-btm-20 {
+    margin-bottom: 20px;
+}
+.margin-top-20 {
+    margin-top: 20px;
+}
+
+// footer
+footer {
+    background-color: #000;
+    padding-top: 80px;
+    padding-bottom: 80px;
+    margin-top: 50px;
+    position: relative;
+    bottom: 0px;
+}
+footer li a {
+    color: #fff;
+}
+footer li a:hover {
+    color: #9f9f9f;
+}
+footer h4 {
+    color: #66eb9a;
+}
+footer ul {
+    padding-left: 0px;
+}
+footer li {
+    list-style-type: none;
 }

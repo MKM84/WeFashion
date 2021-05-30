@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Category;
 use Illuminate\Http\Request;
+use File;
 
 class CategoryController extends Controller
 {
@@ -41,7 +42,14 @@ class CategoryController extends Controller
 
         Category::create($request->all());
 
-        return redirect()->route('category.index')->with('message', 'success');
+        $category = $request->gender;
+        $path = public_path() . '/images/' . $category;
+        if (!File::exists($path)) {
+            File::makeDirectory($path, $mode = 0777, true, true);
+        }
+
+
+        return redirect()->route('category.index')->with('message', 'La catégorie a bien été ajoutée !');
     }
 
     /**
@@ -84,7 +92,7 @@ class CategoryController extends Controller
         $category = Category::find($id);
         $category->update($request->all());
 
-        return redirect()->route('category.index')->with('message', 'success');
+        return redirect()->route('category.index')->with('message', 'La catégorie a bien été éditée !');
     }
 
     /**
@@ -97,6 +105,6 @@ class CategoryController extends Controller
     {
         $category = Category::find($id);
         $category->delete();
-        return redirect()->route('category.index')->with('message', 'success delete');
+        return redirect()->route('category.index')->with('message', 'La catégorie a bien été supprimée !');
     }
 }
