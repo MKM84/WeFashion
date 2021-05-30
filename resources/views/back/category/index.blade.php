@@ -1,17 +1,20 @@
 @extends('layouts.master')
+
 @section('menu')
 @include('back.partials.menu')
 @endsection
+
 @section('content')
+
+{{-- Message succes  --}}
 @include('back.partials.flash')
+
 <p><a href="{{route('category.create')}}">
         <div class=" margin-btm-20 text-right">
             <button type="button" class="btn btn-primary btn-md">Ajouter une catégorie</button>
     </a></p>
 </div>
 
-{{-- On inclut le fichier des messages retournés par les actions du contrôleurs BookController--}}
-{{-- @include('back.book.partials.flash') --}}
 <table class="table table-striped">
     <thead>
         <tr>
@@ -28,7 +31,8 @@
             <td>{{$category->id}}</td>
             <td>
                 <a href="{{route('category.edit', $category->id)}}"> <span class="glyphicon glyphicon-edit"
-                        aria-hidden="true"></span></a></td>
+                        aria-hidden="true"></span></a>
+            </td>
 
             <td>
                 <form class="delete" method="POST" action="{{route('category.destroy', $category->id)}}">
@@ -39,7 +43,9 @@
             </td>
         </tr>
         @empty
-        aucune categorie ...
+        <div class="container-fluid">
+        Aucune categorie ...
+        </div>
         @endforelse
     </tbody>
 </table>
@@ -47,5 +53,6 @@
 @endsection
 @section('scripts')
 @parent
+{{-- Confirm when delete  --}}
 <script src="{{ asset('js/confirm.js') }}"></script>
 @endsection

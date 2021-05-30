@@ -3,6 +3,7 @@
 @section('menu')
 @include('front.partials.menu')
 @endsection
+
 @section('content')
 @if($product)
 

@@ -9,7 +9,7 @@ use File;
 class CategoryController extends Controller
 {
     /**
-     * Display a listing of the resource.
+     * Display a listing of the resource. Categories / Back
      *
      * @return \Illuminate\Http\Response
      */
@@ -20,7 +20,7 @@ class CategoryController extends Controller
     }
 
     /**
-     * Show the form for creating a new resource.
+     * Show the form for creating a new resource. Form create category
      *
      * @return \Illuminate\Http\Response
      */
@@ -30,7 +30,7 @@ class CategoryController extends Controller
     }
 
     /**
-     * Store a newly created resource in storage.
+     * Store a newly created resource in storage. category
      *
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
@@ -44,10 +44,11 @@ class CategoryController extends Controller
 
         $category = $request->gender;
         $path = public_path() . '/images/' . $category;
+
+        // Create directory if doesn't exist 
         if (!File::exists($path)) {
             File::makeDirectory($path, $mode = 0777, true, true);
         }
-
 
         return redirect()->route('category.index')->with('message', 'La catégorie a bien été ajoutée !');
     }

@@ -66,10 +66,11 @@ class ProductController extends Controller
         $im = $request->file('image');
 
         if (!empty($im)) {
-            $category_id = $request->category_id;
 
+            $category_id = $request->category_id;
             $category = Category::find($category_id);
             $category_gender = $category->gender;
+
             $link = $request->file('image')->store('/' . $category_gender);
 
             $product->image()->create([
@@ -104,6 +105,7 @@ class ProductController extends Controller
         $sizes = Size::pluck('name', 'id')->all();
         $image = Image::pluck('link', 'id')->all();
         $categories = Category::all();
+        
         return view('back.product.edit', compact('product', 'categorie', 'image', 'categories', 'sizes'));
     }
 

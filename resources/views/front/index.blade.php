@@ -1,4 +1,5 @@
 @extends('layouts.master')
+
 @section('menu')
 @include('front.partials.menu')
 @endsection
@@ -24,12 +25,9 @@
             <div class="card-body">
                 <h3 class="card-title">{{ $product->name }}</h3>
                 <p class="card-text"> {{ $product->price }} €</p>
-
             </div>
         </a>
-
     </div>
-
     @empty
     <div class="container-fluid">
         <h3>Désolée pour l'instant aucun produit n'est publié...</h3>

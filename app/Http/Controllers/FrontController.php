@@ -10,6 +10,7 @@ use App\Size;
 class FrontController extends Controller
 
 {
+    // front navigation menu 
     public function __construct()
     {
         view()->composer('front.partials.menu', function ($view) {
@@ -18,6 +19,7 @@ class FrontController extends Controller
         });
     }
 
+    // All the products / Home page 
     public function index()
     {
         $products = Product::published()->orderBy('created_at', 'desc')->with('image', 'category', 'sizes')->paginate(6);
@@ -25,6 +27,7 @@ class FrontController extends Controller
         return view('front.index', ['products' => $products]);
     }
 
+    // Show discounted products (soldes)
     public function showProductBySoldes()
     {
         $products = Product::published()->Soldes()->orderBy('created_at', 'desc')->with('image', 'category')->paginate(6);
@@ -32,6 +35,7 @@ class FrontController extends Controller
         return view('front.index', ['products' => $products, 'activeSoldes' => $activeSoldes]);
     }
 
+    // Show produccts by category (Hommes, Femmes...)
     public function showProductByCategory($id)
     {
         $products = Product::published()->orderBy('created_at', 'desc')->where('category_id', $id)->paginate(6);
@@ -40,6 +44,7 @@ class FrontController extends Controller
         return view('front.index', ['products' => $products, 'activeCategory' => $activeCategory]);
     }
 
+    // Show one product 
     public function show(int $id)
     {
         $product = Product::published()->find($id);

@@ -20,20 +20,17 @@
       </ul>
 
       <ul class="nav navbar-nav navbar-right">
-        {{-- renvoie true si vous êtes connecté --}}
 
         <li class="nav-item"><a href="{{ url('/') }}">
             <span class="glyphicon glyphicon-home"></span>
-          </a></li>
-        {{-- @if (Auth::check()) --}}
+          </a>
+        </li>
         <li class="nav-item"><a class="nav-link text-uppercase" href="{{ route('logout') }}"
             onclick=" event.preventDefault(); document.getElementById('logout-form').submit();">Logout</a></li>
         <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
           {{ csrf_field() }}
         </form>
-        {{-- @else
-          <li><a href="{{ route('login') }}">Login</a></li>
-        @endif --}}
+
       </ul>
     </div><!-- /.navbar-collapse -->
   </div><!-- /.container-fluid -->

@@ -12,7 +12,6 @@
 
       <span class="navbar-brand logo-wef"><a href="{{ url('/') }}"><strong>WE FASHION</strong></a></span>
     </div>
-    <!-- Collect the nav links, forms, and other content for toggling -->
     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
 
       <ul class="nav navbar-nav">
@@ -29,7 +28,7 @@
         @endif
       </ul>
       <ul class="nav navbar-nav navbar-right">
-        {{-- renvoie true si vous êtes connecté --}}
+        {{-- Return true if connected --}}
         @if (Auth::check())
         <li class="nav-item"><a href="{{ url('/admin') }}">
             <span class="glyphicon glyphicon-edit"></span>

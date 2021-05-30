@@ -4,13 +4,13 @@
 @include('back.partials.menu')
 @endsection
 @section('content')
-{{-- On inclut le fichier des messages retournés par les actions du contrôleurs BookController--}}
+
 @include('back.partials.flash')
+
 <div class=" margin-btm-20 text-right">
-    <a href="{{route('product.create')}}"><button type="button" class="btn btn-primary btn-md">Nouveau</button></a>
+    <a href="{{route('product.create')}}">
+        <button type="button" class="btn btn-primary btn-md">Nouveau</button></a>
 </div>
-
-
 
 <div>
     <table class="table table-striped">
@@ -21,7 +21,6 @@
                 <th>Prix(€)</th>
                 <th>État</th>
                 <th>Visibilité</th>
-
                 <th>Éditer</th>
                 <th>Supprimer</th>
             </tr>
@@ -30,13 +29,11 @@
             @forelse($products as $product)
             <tr>
                 <td>{{$product->name}}</td>
-
                 <td>
                     @if(is_null($product->category_id)) aucune catégorie
                     @else
                     {{$product->category->gender}}
                     @endif
-
                 </td>
                 <td>{{$product->price}} </td>
 
@@ -72,9 +69,11 @@
             @empty
             <div class="container-fluid">
                 <h3> Aucun produit...</h3>
-                @endforelse
+            </div>
+            @endforelse
         </tbody>
     </table>
+
     @section('pagination')
     {{ $products->links() }}
     @endsection

@@ -3,14 +3,13 @@
 @section('menu')
 @include('back.partials.menu')
 @endsection
+
 @section('content')
 <div class="container">
 
     <div class="row">
-
         <div class="col-md-8 col-md-offset-2">
             <h3>Éditer le produit</h3>
-
             <form action="{{ route('product.update',$product->id) }}" method="post" enctype="multipart/form-data">
                 {{ csrf_field() }}
                 {{ method_field('PUT') }}
@@ -103,14 +102,10 @@
                         <img src="{{ asset('images/' .$product->image->link) }}" alt="" width="60">
                         <span>{{$product->image->link}}</span>
                     </div>
-
                 </div>
                 <div class="text-right margin-top-20 margin-btm-20">
                     <button type="submit" class="btn btn-primary">Éditer</button>
-
                 </div>
-
-
             </form>
         </div><!-- #end col md 6 -->
 

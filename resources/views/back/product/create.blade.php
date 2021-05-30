@@ -1,7 +1,9 @@
 @extends('layouts.master')
+
 @section('menu')
 @include('back.partials.menu')
 @endsection
+
 @section('content')
 <div class="container">
     <div class="col-md-8 col-md-offset-2">
@@ -44,9 +46,7 @@
                 <div class="form-select">
                     <label for="category">Catégorie :</label>
                     <select id="category" name="category_id">
-
                         <option {{ is_null(old('category_id')) ? 'selected' : '' }} value="0">Non-genre</option>
-
                         @foreach ($categories as $id => $gender)
                         <option {{ old('category_id') == $id ? 'selected' : '' }} value="{{ $id }}">
                             {{ $gender }}</option>
