@@ -25,8 +25,8 @@
                 Réseaux sociaux
             </h4>
             <ul>
-                <li><a href="">Facebook</a><i class="fab fa-laravel"></i></li>
-                <li><a href="">Instagram</a></li>
+                <li><a href="">Facebook</a> <img src="{{ asset('fb-logo.svg') }}" alt="Logo Facebook" width="20"></li>
+                <li><a href="">Instagram</a> <img src="{{ asset('insta-logo.svg') }}" alt="Logo Facebook" width="20"></li>
                 <li><a href="">Inscrivez vous à la newsletter</a></li>
             </ul>
         </div>
