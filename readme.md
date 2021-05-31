@@ -1,6 +1,6 @@
 # WE FASHION
 Site E-commerce réalisé avec Laravel Framework.
-### Versions utilisées :
+### Versions des technologies employées :
 - php 7.4.12
 - composer 2.0.11
 - laravel 5.5.50
