@@ -7,7 +7,7 @@ Site E-commerce réalisé avec Laravel Framework.
 - npm 6.14.4
 - node v12.16.1
 ## Initialisation du projet
-### Suivez ces étapes avant de lancer le projet dans votre environnement de développement :  
+### Suivez ces étapes avant de lancer le projet :  
 - Créer une table mySQL sur phpMyAdmin nommée wefashion.
 - Ouvrez le projet dans votre environnement de développement.
 #### Dans votre ligne de commande :
