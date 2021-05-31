@@ -69,7 +69,7 @@
                 </div>
 
                 <div class="input-radio">
-                    <h2>Status</h2>
+                    <h5><strong>Status</strong></h5>
                     <input type="radio" @if (old('status')=='solde' ) checked @endif name="status" value="solde"
                         checked>
                     En
@@ -78,7 +78,7 @@
                     Standard<br>
                 </div>
                 <div class="input-radio">
-                    <h2>Visibilité</h2>
+                    <h5><strong>Visibilité</strong></h5>
                     <input type="radio" @if (old('visibility')=='published' ) checked @endif name="visibility"
                         value="published" checked> Publié<br>
                     <input type="radio" @if (old('visibility')=='unpublished' ) checked @endif name="visibility"
