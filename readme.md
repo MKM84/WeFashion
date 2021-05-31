@@ -2,7 +2,8 @@
 Site E-commerce réalisé avec Laravel Framework.
 ### Versions utilisées :
 - php 7.4.12
-- Laravel 5.5.50
+- composer 2.0.11
+- laravel 5.5.50
 - npm 6.14.4
 - node v12.16.1
 ## Initialisation du projet
