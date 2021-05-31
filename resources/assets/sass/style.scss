@@ -1,3 +1,6 @@
+.btn {
+    border-radius: 20px; 
+}
 .body-container {
     min-height: 50vh;
 }
@@ -19,6 +22,16 @@ img.card-img-top {
         box-shadow: 0 4px 9px 0 #ccc;
     }
 }
+.solded {
+    text-decoration: line-through #66eb9a;
+}
+.soldes {
+    color: #66eb9a;
+}
+.size-form {
+    width:70px
+}
+
 
 // navbar
 .logo-wef,

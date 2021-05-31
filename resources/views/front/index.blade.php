@@ -24,7 +24,12 @@
 
             <div class="card-body">
                 <h3 class="card-title">{{ $product->name }}</h3>
-                <p class="card-text"> {{ $product->price }} €</p>
+
+                @if($product->status == 'solde')
+                <p class="card-text"> <span class="solded">{{ $product->price }} €</span> => {{floor( $product->price / 2)}} €</p>
+                @else
+                <p class="card-text"> <span>{{ $product->price }} €</span></p>
+                @endif
             </div>
         </a>
     </div>
