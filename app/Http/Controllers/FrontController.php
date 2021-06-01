@@ -23,8 +23,8 @@ class FrontController extends Controller
     public function index()
     {
         $products = Product::published()->orderBy('created_at', 'desc')->with('image', 'category', 'sizes')->paginate(6);
-
-        return view('front.index', ['products' => $products]);
+        $allProducts = true;
+        return view('front.index', ['products' => $products, 'allProducts' => $allProducts]);
     }
 
     // Show discounted products (soldes)
@@ -49,5 +49,14 @@ class FrontController extends Controller
     {
         $product = Product::published()->find($id);
         return view('front.show', ['product' => $product]);
+    }
+
+    public function search()
+    {
+        $q = request()->input('q');
+        $products = Product::published()->where('name', 'like', "%$q%")->paginate(6);
+        $allProducts = true;
+
+            return view('front.search', ['products' => $products, 'allProducts' => $allProducts]);
     }
 }

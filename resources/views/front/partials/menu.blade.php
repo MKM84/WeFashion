@@ -28,6 +28,9 @@
         @endif
       </ul>
       <ul class="nav navbar-nav navbar-right">
+        @if(@isset($allProducts))
+        @include('partials.search')
+        @endif
         {{-- Return true if connected --}}
         @if (Auth::check())
         <li class="nav-item"><a href="{{ url('/admin') }}">

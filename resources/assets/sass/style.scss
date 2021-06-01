@@ -1,9 +1,37 @@
 .btn {
     border-radius: 20px; 
 }
-.body-container {
-    min-height: 50vh;
+// input search  
+.search-ctn {
+    display: flex;
+    margin-top: 2px;
 }
+.btn-search {
+    border-radius: 4px;
+    width: 32px;
+    height: 31px;
+    background-color: #66eb9a;
+    margin-left: 1px;
+}
+.btn-default.btn-search {
+    border-color: #66eb9a !important;
+}
+.form-search {
+    height: 32px;
+    max-width: 300px;
+}
+.glyphicon-search:before {
+    content: "\E003";
+    position: absolute;
+    top: 4px;
+    right: 7px;
+}
+
+// to fix the footer on the bottom 
+.body-container {
+    min-height: 60vh;
+}
+
 // product
 .cover-img {
     min-width: 300px;
@@ -54,6 +82,15 @@ img.card-img-top {
 }
 li.nav-item.active a {
     background-color: #211f1f !important;
+}
+.flex-form {
+    display: flex !important;
+    flex-direction: row;
+    justify-content: flex-start;
+    margin-top: 7px;
+}
+.mb-0 {
+    margin-bottom: 0px!important;
 }
 
 // btn
