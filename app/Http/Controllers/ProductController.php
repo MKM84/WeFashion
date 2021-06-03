@@ -68,8 +68,14 @@ class ProductController extends Controller
         if (!empty($im)) {
 
             $category_id = $request->category_id;
+            // If category is non-gender
+            if ($category_id == 0) {
+                $category_gender = 'nongenre';
+            } else {
             $category = Category::find($category_id);
-            $category_gender = $category->gender;
+
+                $category_gender = $category->gender;
+            }
 
             $link = $request->file('image')->store('/' . $category_gender);
 
